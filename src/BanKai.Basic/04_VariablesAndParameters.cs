@@ -11,27 +11,27 @@ namespace BanKai.Basic
 
     public class VariablesAndParameters
     {
-        [Fact]
+        [Fact] 
         public void should_initialize_to_default_value()
         {
             var defaultValueDemo = new DefaultValueDemoClass();
 
             // change the variable values of the following 2 lines to correct values
-            var expectedReferenceTypeValue = new RefTypeClass(default(int));
-            const int expectedValueTypeValue = 1;
+            RefTypeClass expectedReferenceTypeValue = null;  
+            const int expectedValueTypeValue =0;
 
             Assert.Equal(expectedReferenceTypeValue, defaultValueDemo.referenceTypeValue);
             Assert.Equal(expectedValueTypeValue, defaultValueDemo.valueTypeValue);
         }
 
-        [Fact]
+        [Fact] //////char,object默认值；
         public void should_get_default_value_using_default_operator()
         {
             // change the variable values of the following 4 lines to correct values.
-            const int expectedDefaultIntResult = 1;
-            const bool expectedDefaultBoolResult = true;
-            const char expectedDefaultCharResult = 'a';
-            var expectedDefaultObjectResult = new object();
+            const int expectedDefaultIntResult = 0;
+            const bool expectedDefaultBoolResult = false;
+            const char expectedDefaultCharResult =(char)0;        //wrong 
+            object expectedDefaultObjectResult = null;           //wrong  
 
             Assert.Equal(expectedDefaultIntResult, default(int));
             Assert.Equal(expectedDefaultBoolResult, default(bool));
@@ -39,27 +39,27 @@ namespace BanKai.Basic
             Assert.Equal(expectedDefaultObjectResult, default(object));
         }
 
-        [Fact]
+        [Fact]  
         public void should_get_copy_of_the_argument_when_passing_by_value_for_value_type()
         {
             int passingInt = 1;
 
             // change the variable value to correct one.
-            const int expectedResult = 2;
+            const int expectedResult = 1;     //value=value*2;但改变的值没有返回或赋值；
 
             FunctionPassingIntAsArgument(passingInt);
 
             Assert.Equal(expectedResult, passingInt);
         }
 
-        [Fact]
+        [Fact]  
         public void should_get_copy_of_the_argument_when_passing_by_value_for_ref_type()
         {
             var refTypeObject = new RefTypeClass(1);
             RefTypeClass modifiedRefTypeObject = FunctionPassingRefTypeClassAsArgument(refTypeObject);
 
             // change the variable value to correct one.
-            RefTypeClass expectedResult = modifiedRefTypeObject;
+            RefTypeClass expectedResult = refTypeObject;
 
             Assert.Same(expectedResult, refTypeObject);
         }
@@ -70,14 +70,14 @@ namespace BanKai.Basic
             int passingInt = 1;
 
             // change the variable value to correct one.
-            const int expectedResult = 1;
+            const int expectedResult = 2;
 
             FunctionPassingRefIntAsArgument(ref passingInt);
 
             Assert.Equal(expectedResult, passingInt);
         }
 
-        [Fact]
+        [Fact]  //不懂，第二行代码没用啊？
         public void should_ref_to_same_location_when_passing_by_ref_for_ref_type()
         {
             var refTypeObject = new RefTypeClass(1);
@@ -87,7 +87,7 @@ namespace BanKai.Basic
                 ref refTypeObject);
 
             // change the variable value to correct one
-            object expectedResult = refToOriginalObject;
+            object expectedResult =2;
 
             Assert.Same(expectedResult, refTypeObject);
         }
@@ -100,7 +100,7 @@ namespace BanKai.Basic
             FunctionPassingOutIntAsArgument(out passingInt);
 
             // change the variable value to correct one
-            const int expectedResult = default(int);
+            const int expectedResult = 2;
 
             Assert.Equal(expectedResult, passingInt);
         }
@@ -114,7 +114,7 @@ namespace BanKai.Basic
                 FunctionPassingOutRefTypeClassAsArgument(out refTypeObject);
             
             // change the variable value to correct one
-            object expectedResult = default(object);
+            object expectedResult = new RefTypeClass(1); 
 
             Assert.Equal(expectedResult, refTypeObject);
         }
@@ -125,7 +125,7 @@ namespace BanKai.Basic
             int sum = PassVariableLengthArguments(1, 2, 3, 4, 5);
 
             // change the variable value to correct one
-            const int expectedResult = default(int);
+            const int expectedResult = 15;
 
             Assert.Equal(expectedResult, sum);
         }
@@ -136,7 +136,7 @@ namespace BanKai.Basic
             int optionalParameterValue = PassAsOptionalArgument();
 
             // change the variable value to correct one
-            const int expectedResult = default(int);
+            const int expectedResult = 23;
 
             Assert.Equal(expectedResult, optionalParameterValue);
         }

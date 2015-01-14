@@ -6,7 +6,7 @@ namespace BanKai.Basic
 {
     public class Interfaces
     {
-        [Fact]
+        [Fact]   
         public void should_implement_more_than_one_interface()
         {
             var duck = new Duck();
@@ -36,7 +36,7 @@ namespace BanKai.Basic
                 new[] {typeof(string)});
 
             // change the variable value to fix the test.
-            const bool expectedHasWriteMethod = true;
+            const bool expectedHasWriteMethod = false;
 
             Assert.Equal(expectedHasWriteMethod, hasWriteMethod);
         }
@@ -51,7 +51,7 @@ namespace BanKai.Basic
             var readResult = readOnlyStreamWithWriteExplicitlyImpl.Read();
 
             // change the variable value to fix the test.
-            const string expectedReadResult = "";
+            const string expectedReadResult = "Hehe";
 
             Assert.Equal(expectedReadResult, readResult);
         }

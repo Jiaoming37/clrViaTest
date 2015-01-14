@@ -16,7 +16,7 @@ namespace BanKai.Basic
             var demoClass = new InheritMemberAccessDemoClass();
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "Public Property Value";
 
             Assert.Equal(expected, demoClass.PublicProperty);
         }
@@ -29,12 +29,12 @@ namespace BanKai.Basic
             string actualValue = demoClass.ManipulateProtectedMember();
 
             // please change the variable value to fix the test.            
-            const string expected = "";
+            const string expected = "The value is Protected Property Value";
 
             Assert.Equal(expected, actualValue);
         }
 
-        [Fact]
+        [Fact]  /////public修饰的子类强转成父类，调用时是自己的方法；
         public void should_access_member_of_most_derived_class()
         {
             var demoClass = new PolymorphismDemoClass();
@@ -43,7 +43,7 @@ namespace BanKai.Basic
             string actualValue = castToBaseClass.VirtualMethod();
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "DerivedClass";
 
             Assert.Equal(expected, actualValue);
         }
@@ -57,7 +57,7 @@ namespace BanKai.Basic
             bool isNull = castToBaseClass == null;
 
             // please change the variable value to fix the test.
-            const bool expected = true;
+            const bool expected = false;
 
             Assert.Equal(expected, isNull);
         }
@@ -72,7 +72,7 @@ namespace BanKai.Basic
             bool isNull = castResult == null;
 
             // please change the variable value to fix the test.
-            const bool expected = false;
+            const bool expected = true;
 
             Assert.Equal(expected, isNull);
         }
@@ -84,7 +84,7 @@ namespace BanKai.Basic
             object castToObject = demoClass;
 
             // please change the variable value to fix the test.
-            Type expectedExceptionType = typeof(ArgumentException);
+            Type expectedExceptionType = typeof(InvalidCastException);
 
             Assert.NotEqual(typeof(SystemException), expectedExceptionType);
             Assert.NotEqual(typeof(Exception), expectedExceptionType);
@@ -101,7 +101,7 @@ namespace BanKai.Basic
             bool referenceEqual = ReferenceEquals(demoClass, castToBaseClass);
 
             // please change the variable value to fix the test.
-            const bool expected = false;
+            const bool expected = true;
 
             Assert.Equal(expected, referenceEqual);
         }
@@ -112,7 +112,7 @@ namespace BanKai.Basic
             var demoClassBase = new PolymorphismDemoClassBase();
 
             // please change the variable value to fix the test.
-            Type expectedExceptionType = typeof(ArgumentException);
+            Type expectedExceptionType = typeof(InvalidCastException);
 
             Assert.NotEqual(typeof(SystemException), expectedExceptionType);
             Assert.NotEqual(typeof(Exception), expectedExceptionType);
@@ -120,7 +120,7 @@ namespace BanKai.Basic
             Assert.Throws(expectedExceptionType, () => (PolymorphismDemoClass)demoClassBase);
         }
 
-        [Fact]
+        [Fact]  /////强转成父类就会调用父类方法？internal用于同一个程序集；
         public void should_be_able_to_hide_non_virtual_method_in_derived_class()
         {
             var demoClass = new HideMemberDemoClass();
@@ -130,8 +130,8 @@ namespace BanKai.Basic
             string baseClassMethodReturnValue = castedToBaseClass.MethodToHide();
 
             // please change the following 2 variable values to fix the test.
-            const string expectedMethodReturnValue = "";
-            const string expectedBaseClassMethodReturnValue = "";
+            const string expectedMethodReturnValue = "HideMemberDemoClass::MethodToHide()";
+            const string expectedBaseClassMethodReturnValue = "HideMemberDemoClassBase::MethodToHide()";
 
             Assert.Equal(expectedMethodReturnValue, methodReturnValue);
             Assert.Equal(expectedBaseClassMethodReturnValue, baseClassMethodReturnValue);
@@ -145,7 +145,7 @@ namespace BanKai.Basic
             string name = demoClass.Name;
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "BaseClass's derived class.";
 
             Assert.Equal(expected, name);
         }
@@ -158,7 +158,7 @@ namespace BanKai.Basic
             string message = demoClass.ConstructorCallMessage;
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "InheritanceConstructorCallDemoClassBase::Ctor()";
 
             Assert.Equal(expected, message);
         }
@@ -171,7 +171,7 @@ namespace BanKai.Basic
             string message = demoClass.ConstructorCallMessage;
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "InheritanceConstructorCallDemoClassBase::Ctor(int)";
 
             Assert.Equal(expected, message);
         }
@@ -184,7 +184,7 @@ namespace BanKai.Basic
             string message = demoClass.ConstructorCallMessage;
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "InheritanceConstructorCallDemoClass::Ctor(string)";
 
             Assert.Equal(expected, message);
         }
@@ -197,7 +197,7 @@ namespace BanKai.Basic
             string message = demoClass.ConstructorCallMessage;
 
             // please change the variable value to fix the test.
-            const string expected = "";
+            const string expected = "InheritanceConstructorCallDemoClass::Ctor(int, string)";
 
             Assert.Equal(expected, message);
         }
@@ -214,9 +214,9 @@ namespace BanKai.Basic
             string returnValueForCastingOverloading =
                 demoClass.Foo((MethodOverloadBaseClass) (new MethodOverloadDerivedClass()));
 
-            const string expectedBaseClassOverloadingValue = "";
-            const string expectedDerivedClassOverloadingValue = "";
-            const string expectedCastOverloadingValue = "";
+            const string expectedBaseClassOverloadingValue = "Foo(MethodOverloadBaseClass)";
+            const string expectedDerivedClassOverloadingValue = "Foo(MethodOverloadDerivedClass)";
+            const string expectedCastOverloadingValue = "Foo(MethodOverloadBaseClass)";
 
             Assert.Equal(expectedBaseClassOverloadingValue, returnValueForBaseClassOverloading);
             Assert.Equal(expectedDerivedClassOverloadingValue, returnValueForDerivedClassOverloading);

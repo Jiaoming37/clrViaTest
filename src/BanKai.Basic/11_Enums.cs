@@ -16,8 +16,8 @@ namespace BanKai.Basic
             const bool rightEqualsRight = BorderSide.Right == BorderSide.Right;
 
             // change the variable value for following 2 lines to fix the test.
-            const bool expectedResultForBottomEqualsLeft = true;
-            const bool expectedResultForRightEqualsRight = false;
+            const bool expectedResultForBottomEqualsLeft = false;
+            const bool expectedResultForRightEqualsRight = true;
 
             Assert.Equal(expectedResultForBottomEqualsLeft, bottomEqualsLeft);
             Assert.Equal(expectedResultForRightEqualsRight, rightEqualsRight);
@@ -28,8 +28,8 @@ namespace BanKai.Basic
         {
             // change the variable value for following 4 lines to fix the test.
             const int leftValue = int.MinValue;
-            const int rightValue = int.MinValue;
-            const int topValue = int.MinValue;
+            const int rightValue = int.MaxValue;
+            const int topValue = int.MaxValue;
             const int bottomValue = int.MinValue;
 
             Assert.True((BorderSide) leftValue == BorderSide.Left);
@@ -60,7 +60,7 @@ namespace BanKai.Basic
                 BorderSideExplicity.Left == BorderSideExplicity.LeftEquivalent;
 
             // change the variable value to fix the test.
-            const bool expectedCompareResult = false;
+            const bool expectedCompareResult = true;
 
             Assert.Equal(expectedCompareResult, differentDeclareWithSameValueCompareResult);
         }
@@ -86,7 +86,7 @@ namespace BanKai.Basic
             var parsedBottomEnumValue = (BorderSide)Enum.Parse(typeof(BorderSide), "Bottom");
 
             // change the variable value to fix the test.
-            const BorderSide expectedEnumValue = BorderSide.Left;
+            const BorderSide expectedEnumValue = BorderSide.Bottom;
 
             Assert.Equal(expectedEnumValue, parsedBottomEnumValue);
         }
@@ -97,7 +97,7 @@ namespace BanKai.Basic
             var parsedBottomEnumValue = (BorderSide)Enum.Parse(typeof(BorderSide), "3");
 
             // change the variable value to fix the test.
-            const BorderSide expectedEnumValue = BorderSide.Left;
+            const BorderSide expectedEnumValue = BorderSide.Bottom;
 
             Assert.Equal(expectedEnumValue, parsedBottomEnumValue);
         }
@@ -110,7 +110,7 @@ namespace BanKai.Basic
             const bool includeLeft = (leftAndRight & BorderSideFlag.Left) != 0;
             
             // change the variable value to fix the test.
-            const bool expectedIncludeLeft = false;
+            const bool expectedIncludeLeft = true;
 
             Assert.Equal(expectedIncludeLeft, includeLeft);
         }

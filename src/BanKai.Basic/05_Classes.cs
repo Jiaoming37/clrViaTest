@@ -17,7 +17,7 @@ namespace BanKai.Basic
             string chosenOne = demoObject.Foo(1);
 
             // change variable value to correct one.
-            const string expected = "Foo()";
+            const string expected = "Foo(int)";
 
             Assert.Equal(expected, chosenOne);
         }
@@ -30,12 +30,12 @@ namespace BanKai.Basic
             string chosenOne = demoObject.Foo((object)1);
 
             // change variable value to correct one.
-            const string expected = "Foo()";
+            const string expected = "Foo(object)";
 
             Assert.Equal(expected, chosenOne);
         }
 
-        [Fact]
+        [Fact]  
         public void should_choose_correct_overloading_method_at_compile_time_3()
         {
             var demoObject = new MethodOverloadDemoClass();
@@ -44,12 +44,12 @@ namespace BanKai.Basic
             string chosenOne = demoObject.Foo(argument);
 
             // change variable value to correct one.
-            const string expected = "Foo()";
+            const string expected = "Foo(int)";      //short是int的一种情况；
 
             Assert.Equal(expected, chosenOne);
         }
 
-        [Fact]
+        [Fact] ////////////////wrong????????
         public void should_call_other_instance_constructor_in_overload_constructor()
         {
             var demoClass = new ConstructorOverloadingDemoClass("arg");
@@ -57,7 +57,7 @@ namespace BanKai.Basic
             string constructorCallSequence = demoClass.ConstructorCallSequence;
 
             // change variable value to correct one.
-            const string expectedSequence = "Ctor(string)";
+            const string expectedSequence = "Ctor()\r\nCtor(string)\r\n";
 
             Assert.Equal(expectedSequence, constructorCallSequence);
         }
@@ -70,12 +70,12 @@ namespace BanKai.Basic
             bool hasDefaultConstructor = demoClass.HasDefaultConstructor();
 
             // change variable value to correct one.
-            const bool expected = false;
+            const bool expected = true;
 
             Assert.Equal(expected, hasDefaultConstructor);
         }
 
-        [Fact]
+        [Fact] 
         public void should_not_generate_parameterless_constructor_if_parameterized_constructor_exists()
         {
             var demoClass = new ParameterizedConstructorClassDemo(1);
@@ -83,7 +83,7 @@ namespace BanKai.Basic
             bool hasDefaultConstructor = demoClass.HasDefaultConstructor();
 
             // change variable value to correct one.
-            const bool expected = true;
+            const bool expected = false;    
 
             Assert.Equal(expected, hasDefaultConstructor);
         }
@@ -94,6 +94,8 @@ namespace BanKai.Basic
             var demoClass = new ObjectInitializerDemoClass("property1")
             {
                 // add property initialization logic here.
+                Property1 = "property1.1",
+                Property2 = "property2.1",
             };
 
             const string expectedProperty1 = "property1.1";
@@ -111,7 +113,7 @@ namespace BanKai.Basic
             demoClass.Name = "My Name";
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "My Name";
 
             Assert.Equal(expected, demoClass.Name);
         }
@@ -124,7 +126,7 @@ namespace BanKai.Basic
             demoClass.Name = "My Name";
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "Your Name Is My Name";
 
             Assert.Equal(expected, demoClass.Name);
         }
@@ -137,7 +139,7 @@ namespace BanKai.Basic
             string indexerValue = demoClass[2];
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "You are accessing indexer 2";
 
             Assert.Equal(expected, indexerValue);
         }
@@ -150,12 +152,12 @@ namespace BanKai.Basic
             string indexerValue = demoClass["stringArgument"];
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "You are accessing indexer stringArgument";
 
             Assert.Equal(expected, indexerValue);
         }
 
-        [Fact]
+        [Fact]////////////////wrong???替换里面的{0}和{1}；
         public void should_be_able_to_access_multiple_indexer_arguments()
         {
             var demoClass = new IndexerDemoClass();
@@ -163,7 +165,7 @@ namespace BanKai.Basic
             string indexerValue = demoClass[1, "Hello"];
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "You are accessing indexer with first argument 1 and second argument Hello";
 
             Assert.Equal(expected, indexerValue);
         }
@@ -174,7 +176,7 @@ namespace BanKai.Basic
             string staticFieldValue = StaticConstructorDemoClass.StaticField;
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "You are so cute!";
 
             Assert.Equal(expected, staticFieldValue);
         }
@@ -189,7 +191,7 @@ namespace BanKai.Basic
             }
 
             // please change variable value to correct one.
-            const bool expected = default(bool);
+            const bool expected = true;  
 
             Assert.Equal(expected, disposable.IsDisposed);
         }
@@ -206,7 +208,7 @@ namespace BanKai.Basic
             string name = demoClass.ToString();
 
             // please change variable value to correct one.
-            const string expected = "";
+            const string expected = "Mr. Hall";
 
             Assert.Equal(expected, name);
         }
